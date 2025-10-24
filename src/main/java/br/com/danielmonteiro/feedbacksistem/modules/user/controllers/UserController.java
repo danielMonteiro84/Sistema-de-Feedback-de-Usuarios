@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.danielmonteiro.feedbacksistem.modules.user.UserEntity;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @PostMapping("/")
-    public void create(@RequestBody UserEntity userEntity) {
+    public void create(@Valid @RequestBody UserEntity userEntity) {
         System.out.println("Usuario");
         System.out.println(userEntity.getEmail());
     }
