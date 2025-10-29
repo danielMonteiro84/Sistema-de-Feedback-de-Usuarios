@@ -1,16 +1,25 @@
 package br.com.danielmonteiro.feedbacksistem.modules.user;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
+@Entity(name = "user")
 public class UserEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_.]{2,19}$", message = "Username inválido")
@@ -22,5 +31,8 @@ public class UserEntity {
     @Length(min = 10, max = 20)
     private String password;
     private String description;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
